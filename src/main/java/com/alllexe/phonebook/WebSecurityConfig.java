@@ -3,7 +3,7 @@
  * @version 1
  * @since 14.02.2020
  */
-package com.alllexe.phonebook.phonebook;
+package com.alllexe.phonebook;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

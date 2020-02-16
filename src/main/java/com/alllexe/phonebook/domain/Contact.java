@@ -3,14 +3,21 @@
  * @version 1
  * @since 14.02.2020
  */
-package com.alllexe.phonebook.phonebook.domain;
+package com.alllexe.phonebook.domain;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Objects;
 
+@ApiModel(description = "Details about the contact")
 public class Contact {
 
+    @ApiModelProperty(notes = "The uniq id of the contact")
     private Integer id;
+    @ApiModelProperty(notes = "The person's name")
     private String name;
+    @ApiModelProperty(notes = "The person's phone number")
     private String phone;
 
     public Contact() {

@@ -1,4 +1,4 @@
-package com.alllexe.phonebook.phonebook;
+package com.alllexe.phonebook;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

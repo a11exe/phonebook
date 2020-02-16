@@ -3,9 +3,10 @@
  * @version 1
  * @since 14.02.2020
  */
-package com.alllexe.phonebook.phonebook.controller;
+package com.alllexe.phonebook.controller;
 
-import com.alllexe.phonebook.phonebook.domain.Contact;
+import com.alllexe.phonebook.domain.Contact;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,11 @@ public class AdressBook {
     ConcurrentMap<Integer, Contact> contacts = new ConcurrentHashMap<>();
 
     @GetMapping("/{id}")
+    @ApiOperation(
+            value = "Find contact by id",
+            notes = "Provide an id to look up specific contact",
+            response = Contact.class
+    )
     public Contact getContact(@PathVariable Integer id) {
         return contacts.get(id);
     }
