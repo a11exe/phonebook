@@ -1,7 +1,7 @@
 create table contacts (
   id      int8 not null,
   name    varchar(255),
-  phone     varchar(255),
+  phone   varchar(255),
   user_id int8,
   primary key (id)
 );
