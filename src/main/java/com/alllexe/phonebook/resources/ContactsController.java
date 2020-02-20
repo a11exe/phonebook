@@ -3,10 +3,13 @@
  * @version 1
  * @since 14.02.2020
  */
-package com.alllexe.phonebook.controller;
+package com.alllexe.phonebook.resources;
 
 import com.alllexe.phonebook.domain.Contact;
+import com.alllexe.phonebook.service.ContactService;
 import io.swagger.annotations.ApiOperation;
+import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,16 +17,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @RestController
 @RequestMapping("/api")
-public class AdressBook {
+public class ContactsController {
 
-    ConcurrentMap<Integer, Contact> contacts = new ConcurrentHashMap<>();
+    @Autowired
+    private ContactService contactService;
 
     @GetMapping("/{id}")
     @ApiOperation(
@@ -32,17 +33,17 @@ public class AdressBook {
             response = Contact.class
     )
     public Contact getContact(@PathVariable Integer id) {
-        return contacts.get(id);
+        return contactService.findById(id);
     }
 
-    @GetMapping("/")
+    @GetMapping("/contacts")
     public List<Contact> getAllContacts() {
-        return new ArrayList<>(contacts.values());
+        List<Contact> contacts = new ArrayList<>();
+        return contacts;
     }
 
     @PostMapping("/")
     public Contact addContact(@RequestBody Contact contact) {
-        contacts.put(contact.getId(), contact);
         return contact;
     }
 
