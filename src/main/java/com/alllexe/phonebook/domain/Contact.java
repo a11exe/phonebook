@@ -8,6 +8,7 @@ package com.alllexe.phonebook.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -47,18 +48,21 @@ public class Contact {
     @ApiModelProperty(notes = "The contact's middle name")
     @NotBlank(message = "Middle name can't be empty")
     @Length(min = 4, message = "middle name min 4")
+    @Column(name = "middle_name")
     private String middleName;
     @ApiModelProperty(notes = "The contact's mobile phone number")
     @NotBlank(message = "Mobile phone can't be empty")
+    @Column(name = "phone_mobile")
     private String phoneMobile;
     @ApiModelProperty(notes = "The contact's home phone number")
+    @Column(name = "phone_home")
     private String phoneHome;
     @ApiModelProperty(notes = "The contact's address")
     private String address;
     @ApiModelProperty(notes = "The contact's email")
     @Email(message = "Email is not correct")
     private String email;
-    
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;

@@ -1,7 +1,9 @@
 package com.alllexe.phonebook.service;
 
 import com.alllexe.phonebook.domain.Contact;
+import com.alllexe.phonebook.domain.User;
 import com.alllexe.phonebook.repository.ContactRepo;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,9 @@ public class ContactService {
 
   public Contact findById(Integer id) {
     return contactRepo.findById(id).orElse(null);
+  }
+
+  public List<Contact> findAllByAuthor(User currentUser) {
+    return contactRepo.findAllByAuthor(currentUser);
   }
 }

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class RegistrationController {
 
-
   @Autowired
   private UserService userService;
 
