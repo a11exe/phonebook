@@ -25,4 +25,36 @@ public class ContactService {
   public List<Contact> findAllByAuthor(User currentUser) {
     return contactRepo.findAllByAuthor(currentUser);
   }
+
+  public void addContact(Contact contact) {
+    contactRepo.save(contact);
+  }
+
+  public void delete(Contact contact, User currentUser) {
+    if (contact != null && currentUser.equals(contact.getAuthor())) {
+      contactRepo.delete(contact);
+    }
+  }
+
+  public void editContact(Integer contactId, Contact contactUpdated,
+      User currentUser) {
+    Contact contact = contactRepo.findById(contactId).orElse(null);
+    if (contact!= null && currentUser.equals(contact.getAuthor())) {
+      contact.setName(contactUpdated.getName());
+      contact.setMiddleName(contactUpdated.getMiddleName());
+      contact.setSurname(contactUpdated.getSurname());
+      contact.setAddress(contactUpdated.getAddress());
+      contact.setEmail(contactUpdated.getEmail());
+      contact.setPhoneHome(contactUpdated.getPhoneHome());
+      contact.setPhoneMobile(contactUpdated.getPhoneMobile());
+      contactRepo.save(contact);
+    }
+  }
+
+  public List<Contact> findContacts(User currentUser, String search) {
+    StringBuilder likeSearch = new StringBuilder(search);
+    likeSearch.append("%");
+    likeSearch.insert(0, "%");
+    return contactRepo.findContacts(currentUser, likeSearch.toString());
+  }
 }

@@ -38,15 +38,12 @@ public class Contact {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
     @ApiModelProperty(notes = "The contact's name")
-    @NotBlank(message = "Name can't be empty")
     @Length(min = 4, message = "name min 4")
     private String name;
     @ApiModelProperty(notes = "The contact's surname")
-    @NotBlank(message = "Surname can't be empty")
     @Length(min = 4, message = "surname min 4")
     private String surname;
     @ApiModelProperty(notes = "The contact's middle name")
-    @NotBlank(message = "Middle name can't be empty")
     @Length(min = 4, message = "middle name min 4")
     @Column(name = "middle_name")
     private String middleName;

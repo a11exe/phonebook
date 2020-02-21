@@ -1,4 +1,4 @@
-insert into contacts(id, name, surname, middle_name, phone_home, address, email, user_id)
+insert into contacts(id, name, surname, middle_name, phone_mobile, address, email, user_id)
   values
     ('100', 'Mike', 'Armor', 'A', '+380(66) 5790227', 'Black, 107', 'mike@mail.com', '100'),
     ('101', 'Mike', 'Green', 'Sam', '+380(66) 2920553', 'Anderson, 58', 'mike@mail.com', '100'),

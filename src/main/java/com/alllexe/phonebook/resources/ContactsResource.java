@@ -38,8 +38,7 @@ public class ContactsResource {
 
     @GetMapping("/contacts")
     public List<Contact> getAllContacts() {
-        List<Contact> contacts = new ArrayList<>();
-        return contacts;
+      return new ArrayList<>();
     }
 
     @PostMapping("/")
