@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,21 +36,17 @@ public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   private Integer id;
-  @NotBlank(message = "Login can't be empty")
   @Length(min = 3, message = "login min 3")
   @Pattern(regexp = "^[A-Za-z1-9]*$", message = "only english letters and numbers")
   @Column(name = "login")
   private String username;
-  @NotBlank(message = "Username can't be empty")
   @Length(min = 5, message = "name too short. min 5")
   private String name;
-  @NotBlank(message = "Password can't be empty")
   @Length(min = 5, message = "password too short. min 5")
   private String password;
 
   private boolean active;
 
-  @NotBlank(message = "Email can't be empty")
   @Email(message = "Email is not correct")
   private String email;
 

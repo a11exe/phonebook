@@ -8,6 +8,7 @@ package com.alllexe.phonebook.domain;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,11 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.validator.constraints.Length;
 
 @ApiModel(description = "Details about the contact")
 @Entity(name="contacts")
@@ -33,10 +37,29 @@ public class Contact {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
-    @ApiModelProperty(notes = "The person's name")
+    @ApiModelProperty(notes = "The contact's name")
+    @Length(min = 4, message = "name min 4")
     private String name;
-    @ApiModelProperty(notes = "The person's phone number")
-    private String phone;
+    @ApiModelProperty(notes = "The contact's surname")
+    @Length(min = 4, message = "surname min 4")
+    private String surname;
+    @ApiModelProperty(notes = "The contact's middle name")
+    @Length(min = 4, message = "middle name min 4")
+    @Column(name = "middle_name")
+    private String middleName;
+    @ApiModelProperty(notes = "The contact's mobile phone number")
+    @NotBlank(message = "Mobile phone can't be empty")
+    @Column(name = "phone_mobile")
+    private String phoneMobile;
+    @ApiModelProperty(notes = "The contact's home phone number")
+    @Column(name = "phone_home")
+    private String phoneHome;
+    @ApiModelProperty(notes = "The contact's address")
+    private String address;
+    @ApiModelProperty(notes = "The contact's email")
+    @Email(message = "Email is not correct")
+    private String email;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;

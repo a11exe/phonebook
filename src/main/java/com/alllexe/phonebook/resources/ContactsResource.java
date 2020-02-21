@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-public class ContactsController {
+public class ContactsResource {
 
     @Autowired
     private ContactService contactService;
@@ -38,8 +38,7 @@ public class ContactsController {
 
     @GetMapping("/contacts")
     public List<Contact> getAllContacts() {
-        List<Contact> contacts = new ArrayList<>();
-        return contacts;
+      return new ArrayList<>();
     }
 
     @PostMapping("/")
