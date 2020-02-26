@@ -17,7 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,11 +48,12 @@ public class Contact {
     @Column(name = "middle_name")
     private String middleName;
     @ApiModelProperty(notes = "The contact's mobile phone number")
-    @NotBlank(message = "Mobile phone can't be empty")
     @Column(name = "phone_mobile")
+    @Pattern(regexp = "^\\+380\\d{9}$", message = "phone number format +380xxxxxxxxx")
     private String phoneMobile;
     @ApiModelProperty(notes = "The contact's home phone number")
     @Column(name = "phone_home")
+    @Pattern(regexp = "^(?:\\+380\\d{9}|)$", message = "phone number format +380xxxxxxxxx")
     private String phoneHome;
     @ApiModelProperty(notes = "The contact's address")
     private String address;
