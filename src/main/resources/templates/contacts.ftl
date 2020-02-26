@@ -63,7 +63,7 @@
       </div>
       <div class="form-group">
         <input type="text" class="form-control ${(phoneMobileError??)?string('is-invalid', '')}"
-               value="<#if contact??>${(contact.phoneMobile)!}</#if>" name="phoneMobile" placeholder="Введите мобильный телефон" />
+               value="<#if contact??>${(contact.phoneMobile)!}<#else >+380</#if>" name="phoneMobile" placeholder="Введите мобильный телефон в формате +380661234567" />
         <#if phoneMobileError??>
           <div class="invalid-feedback">
             ${phoneMobileError}
@@ -73,7 +73,7 @@
 
       <div class="form-group">
         <input type="text" class="form-control ${(phoneHomeError??)?string('is-invalid', '')}"
-               value="<#if contact??>${(contact.phoneHome)!}</#if>" name="phoneHome" placeholder="Введите домашний телефон" />
+               value="<#if contact??>${(contact.phoneHome)!}</#if>" name="phoneHome" placeholder="Введите домашний телефон в формате +380661234567" />
         <#if phoneHomeError??>
           <div class="invalid-feedback">
             ${phoneHomeError}
