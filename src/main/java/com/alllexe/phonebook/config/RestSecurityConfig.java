@@ -15,7 +15,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
@@ -33,23 +32,35 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers()
-            .antMatchers("/api/**")
-            .and()
-                .httpBasic()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().authorizeRequests()
-            .antMatchers(
-                "/csrf",
-                "/v2/api-docs",
-                "/swagger-resources/**",
-                "/swagger-ui.html",
-                "/webjars/**"
-            ).permitAll()
+      http.antMatcher("/api/** ** ")
+          .authorizeRequests()
+          .and().httpBasic().authenticationEntryPoint(restAuthenticationEntryPoint())
+          .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+      .and().authorizeRequests().antMatchers(
+          "/csrf",
+          "/v2/api-docs",
+          "/swagger-resources/**",
+          "/swagger-ui.html",
+          "/webjars/**"
+      ).permitAll();
+
+
+//        http.authorizeRequests()
+//            .antMatchers(
+//                "/csrf",
+//                "/v2/api-docs",
+//                "/swagger-resources/**",
+//                "/swagger-ui.html",
+//                "/webjars/**"
+//            ).permitAll()
+//            .antMatchers("/api/**").authenticated()
+//            .and()
+//                .httpBasic()
+//                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 //.authenticationEntryPoint(restAuthenticationEntryPoint())
-            .and()
-                .formLogin().disable()
-                .logout().disable();
+//            .and()
+//                .formLogin().disable()
+//                .logout().disable();
 //        http
 //            .requestMatchers()
 //            .antMatchers("/api/**")

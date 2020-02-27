@@ -3,14 +3,14 @@
 
 <div class="container">
   <div class="col sm-6 mb-3">
-    <form method="post" action="/find">
+    <form method="post" action="/contacts/find">
       <div class="input-group">
 
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <input type="text" class="form-control"
                name="search"
                value="<#if search??>${(search)!}</#if>"
-               placeholder="Search contact">
+               placeholder="Search contact" />
         <div class="input-group-append">
           <button class="btn btn-secondary" type="submit">
             <i class="fa fa-search"></i>
@@ -101,7 +101,7 @@
       </div>
 
       <input type="hidden" name="_csrf" value="${_csrf.token}" />
-      <input type="hidden" name="id" value=0 />
+      <input type="hidden" name="id" value="0" />
       <button class="btn btn-primary" type="submit">Save contact</button>
     </form>
   </div>
@@ -135,8 +135,8 @@
         <td>${(contact.phoneHome)!}</td>
         <td>${(contact.address)!}</td>
         <td>${(contact.email)!}</td>
-        <td><a class="btn btn-primary" href="/edit/${contact.id?c}" role="button"><i class="fas fa-user-edit"></i></a></td>
-        <td><a class="btn btn-primary" href="/delete/${contact.id?c}" role="button"><i class="fas fa-user-times"></i></a></td>
+        <td><a class="btn btn-primary" href="/contacts/edit/${contact.id?c}" role="button"><i class="fas fa-user-edit"></i></a></td>
+        <td><a class="btn btn-primary" href="/contacts/delete/${contact.id?c}" role="button"><i class="fas fa-user-times"></i></a></td>
       </tr>
   <#else>
         <th scope="row">1</th>

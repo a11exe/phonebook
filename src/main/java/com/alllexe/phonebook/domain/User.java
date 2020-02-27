@@ -1,6 +1,5 @@
 package com.alllexe.phonebook.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
 import java.util.Set;

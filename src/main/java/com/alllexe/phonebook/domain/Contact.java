@@ -31,7 +31,7 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"author"})
 @EqualsAndHashCode(of = {"id"})
 @JsonIgnoreProperties("author")
 public class Contact {

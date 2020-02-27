@@ -10,7 +10,6 @@ import com.alllexe.phonebook.domain.User;
 import com.alllexe.phonebook.exception.ContactNotFoundException;
 import com.alllexe.phonebook.service.ContactService;
 import io.swagger.annotations.ApiOperation;
-import java.util.ArrayList;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
