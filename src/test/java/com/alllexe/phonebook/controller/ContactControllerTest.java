@@ -1,4 +1,4 @@
-package com.alllexe.phonebook;
+package com.alllexe.phonebook.controller;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.response.SecurityMockMvcResultMatchers.authenticated;
