@@ -5,6 +5,7 @@
  */
 package com.alllexe.phonebook.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -30,8 +31,9 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"author"})
 @EqualsAndHashCode(of = {"id"})
+@JsonIgnoreProperties("author")
 public class Contact {
     @ApiModelProperty(notes = "The uniq id of the contact")
     @Id
@@ -61,7 +63,8 @@ public class Contact {
     @Email(message = "Email is not correct")
     private String email;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ApiModelProperty(hidden = true)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User author;
 }

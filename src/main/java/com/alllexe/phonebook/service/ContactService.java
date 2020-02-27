@@ -4,6 +4,7 @@ import com.alllexe.phonebook.domain.Contact;
 import com.alllexe.phonebook.domain.User;
 import com.alllexe.phonebook.repository.ContactRepo;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,6 @@ public class ContactService {
 
   @Autowired
   private ContactRepo contactRepo;
-
-  public Contact findById(Integer id) {
-    return contactRepo.findById(id).orElse(null);
-  }
 
   public List<Contact> findAllByAuthor(User currentUser) {
     return contactRepo.findAllByAuthor(currentUser);
@@ -56,5 +53,9 @@ public class ContactService {
     likeSearch.append("%");
     likeSearch.insert(0, "%");
     return contactRepo.findContacts(currentUser, likeSearch.toString());
+  }
+
+  public Optional<Contact> findByIdAndAuthor(Integer id, User currentUser) {
+    return contactRepo.findByIdAndAuthor(id, currentUser);
   }
 }

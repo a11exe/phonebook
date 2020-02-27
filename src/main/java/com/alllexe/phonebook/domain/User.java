@@ -1,5 +1,6 @@
 package com.alllexe.phonebook.domain;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Collection;
 import java.util.Set;
 import javax.persistence.CascadeType;
@@ -35,6 +36,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
+  @ApiModelProperty(hidden = true)
   private Integer id;
   @Length(min = 3, message = "login min 3")
   @Pattern(regexp = "^[A-Za-z1-9]*$", message = "only english letters and numbers")
@@ -45,20 +47,25 @@ public class User implements UserDetails {
   @Length(min = 5, message = "password too short. min 5")
   private String password;
 
+  @ApiModelProperty(hidden = true)
   private boolean active;
 
   @Email(message = "Email is not correct")
+  @ApiModelProperty(hidden = true)
   private String email;
 
+  @ApiModelProperty(hidden = true)
   @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<Contact> contacts;
 
   @Override
+  @ApiModelProperty(hidden = true)
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return null;
   }
 
   @Override
+  @ApiModelProperty(hidden = true)
   public boolean isEnabled() {
     return active;
   }
@@ -74,16 +81,19 @@ public class User implements UserDetails {
   }
 
   @Override
+  @ApiModelProperty(hidden = true)
   public boolean isAccountNonExpired() {
     return true;
   }
 
   @Override
+  @ApiModelProperty(hidden = true)
   public boolean isAccountNonLocked() {
     return true;
   }
 
   @Override
+  @ApiModelProperty(hidden = true)
   public boolean isCredentialsNonExpired() {
     return true;
   }

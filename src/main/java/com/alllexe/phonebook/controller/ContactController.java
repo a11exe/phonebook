@@ -27,6 +27,11 @@ public class ContactController {
   private ContactService contactService;
 
   @GetMapping("/")
+  public String basic() {
+    return "redirect:/contacts";
+  }
+
+  @GetMapping("/contacts")
   public String getContacts(
       @AuthenticationPrincipal User currentUser,
       Model model) {
@@ -34,7 +39,7 @@ public class ContactController {
     return "contacts";
   }
 
-  @PostMapping("/find")
+  @PostMapping("/contacts/find")
   public String getContacts(
       @AuthenticationPrincipal User currentUser,
       @RequestParam String search,
@@ -45,7 +50,7 @@ public class ContactController {
   }
 
 
-  @PostMapping("/")
+  @PostMapping("/contacts")
   public String addContact(
       @Valid Contact contact,
       BindingResult bindingResult,
@@ -59,18 +64,18 @@ public class ContactController {
     }
     contact.setAuthor(currentUser);
     contactService.addContact(contact);
-    return "redirect:/";
+    return "redirect:/contacts";
   }
 
-  @GetMapping("/delete/{id}")
+  @GetMapping("/contacts/delete/{id}")
   public String deleteContact(
       @AuthenticationPrincipal User currentUser,
       @PathVariable(name = "id") Contact contact) {
     contactService.delete(contact, currentUser);
-    return "redirect:/";
+    return "redirect:/contacts";
   }
 
-  @GetMapping("/edit/{contact}")
+  @GetMapping("/contacts/edit/{contact}")
   public String getContact(
       @AuthenticationPrincipal User currentUser,
       @PathVariable Contact contact,
@@ -80,7 +85,7 @@ public class ContactController {
     return "contacts";
   }
 
-  @PostMapping("/edit/{id}")
+  @PostMapping("/contacts/edit/{id}")
   public String editContact(
       @AuthenticationPrincipal User currentUser,
       @PathVariable Integer id,
@@ -96,7 +101,7 @@ public class ContactController {
     }
     contactService.editContact(id, contactUpdated, currentUser);
 
-    return "redirect:/";
+    return "redirect:/contacts";
   }
 
 }
