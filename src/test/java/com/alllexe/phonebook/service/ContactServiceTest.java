@@ -4,7 +4,9 @@ import static org.junit.Assert.assertTrue;
 
 import com.alllexe.phonebook.domain.Contact;
 import com.alllexe.phonebook.domain.User;
+import com.alllexe.phonebook.exception.ContactNotFoundException;
 import com.alllexe.phonebook.repository.ContactRepo;
+import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -37,24 +39,16 @@ public class ContactServiceTest {
 
   @Test
   public void deleteContact() {
-    User author = new User();
-    author.setId(1);
-    Contact contact = new Contact();
-    contact.setAuthor(author);
-    contactService.delete(contact, author);
-    Mockito.verify(contactRepo, Mockito.times(1)).delete(contact);
-  }
 
-  @Test
-  public void deleteAlienContact() {
-    User author = new User();
-    author.setId(1);
-    User currentUser = new User();
-    author.setId(2);
+    User user = new User();
     Contact contact = new Contact();
-    contact.setAuthor(author);
-    contactService.delete(contact, currentUser);
-    Mockito.verify(contactRepo, Mockito.times(0)).delete(contact);
+
+    Mockito.doReturn(Optional.of(contact))
+        .when(contactRepo)
+        .findByIdAndAuthor(contact.getId(), user);
+
+    contactService.delete(contact.getId(), user);
+    Mockito.verify(contactRepo, Mockito.times(1)).delete(contact);
   }
 
 }

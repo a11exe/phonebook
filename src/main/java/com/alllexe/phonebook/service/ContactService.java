@@ -2,6 +2,7 @@ package com.alllexe.phonebook.service;
 
 import com.alllexe.phonebook.domain.Contact;
 import com.alllexe.phonebook.domain.User;
+import com.alllexe.phonebook.exception.ContactNotFoundException;
 import com.alllexe.phonebook.repository.ContactRepo;
 import java.util.List;
 import java.util.Optional;
@@ -27,16 +28,18 @@ public class ContactService {
     contactRepo.save(contact);
   }
 
-  public void delete(Contact contact, User currentUser) {
-    if (contact != null && currentUser.equals(contact.getAuthor())) {
-      contactRepo.delete(contact);
-    }
+  public void delete(Integer contactId, User currentUser) {
+    Contact contact = contactRepo.findByIdAndAuthor(contactId, currentUser).
+        orElseThrow(()->new ContactNotFoundException(contactId));
+    contactRepo.delete(contact);
   }
 
   public void editContact(Integer contactId, Contact contactUpdated,
       User currentUser) {
-    Contact contact = contactRepo.findById(contactId).orElse(null);
-    if (contact!= null && currentUser.equals(contact.getAuthor())) {
+    Contact contact = contactRepo.findByIdAndAuthor(contactId, currentUser).
+        orElseThrow(()->new ContactNotFoundException(contactId));
+
+    if (contact!= null) {
       contact.setName(contactUpdated.getName());
       contact.setMiddleName(contactUpdated.getMiddleName());
       contact.setSurname(contactUpdated.getSurname());

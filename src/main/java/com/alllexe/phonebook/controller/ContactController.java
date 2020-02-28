@@ -70,8 +70,8 @@ public class ContactController {
   @GetMapping("/contacts/delete/{id}")
   public String deleteContact(
       @AuthenticationPrincipal User currentUser,
-      @PathVariable(name = "id") Contact contact) {
-    contactService.delete(contact, currentUser);
+      @PathVariable Integer id) {
+    contactService.delete(id, currentUser);
     return "redirect:/contacts";
   }
 
