@@ -32,17 +32,17 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      http.antMatcher("/api/** ** ")
-          .authorizeRequests()
-          .and().httpBasic().authenticationEntryPoint(restAuthenticationEntryPoint())
-          .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-      .and().authorizeRequests().antMatchers(
-          "/csrf",
-          "/v2/api-docs",
-          "/swagger-resources/**",
-          "/swagger-ui.html",
-          "/webjars/**"
-      ).permitAll();
+//      http.antMatcher("/api/** ** ")
+//          .authorizeRequests()
+//          .and().httpBasic().authenticationEntryPoint(restAuthenticationEntryPoint())
+//          .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//      .and().authorizeRequests().antMatchers(
+//          "/csrf",
+//          "/v2/api-docs",
+//          "/swagger-resources/**",
+//          "/swagger-ui.html",
+//          "/webjars/**"
+//      ).permitAll();
 
 
 //        http.authorizeRequests()
@@ -61,20 +61,21 @@ public class RestSecurityConfig extends WebSecurityConfigurerAdapter {
 //            .and()
 //                .formLogin().disable()
 //                .logout().disable();
-//        http
-//            .requestMatchers()
-//            .antMatchers("/api/**")
-//            .and()
-//            .httpBasic()
-//            .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//            .and().authorizeRequests()
-//            .antMatchers(
-//                "/", "/csrf",
-//                "/v2/api-docs",
-//                "/swagger-resources/**",
-//                "/swagger-ui.html",
-//                "/webjars/**"
-//            ).permitAll();
+        http
+            .requestMatchers()
+            .antMatchers("/api/**")
+            .and()
+            .httpBasic()
+                .and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and().authorizeRequests()
+            .antMatchers(
+                "/", "/csrf",
+                "/v2/api-docs",
+                "/swagger-resources/**",
+                "/swagger-ui.html",
+                "/webjars/**"
+            ).permitAll();
     }
 
     @Override

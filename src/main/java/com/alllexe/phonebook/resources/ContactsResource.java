@@ -11,6 +11,8 @@ import com.alllexe.phonebook.exception.ContactNotFoundException;
 import com.alllexe.phonebook.service.ContactService;
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +32,8 @@ public class ContactsResource {
 
     @Autowired
     private ContactService contactService;
+
+    Logger logger = LoggerFactory.getLogger(ContactService.class);
 
     @GetMapping("/{id}")
     @ApiOperation(
@@ -69,12 +73,11 @@ public class ContactsResource {
     }
 
     @DeleteMapping("/{id}")
-    public Contact deleteContact(
+    public void deleteContact(
         @AuthenticationPrincipal User currentUser,
-        @PathVariable Contact contact) {
+        @PathVariable Integer id) {
 
-        contactService.delete(contact, currentUser);
-        return contact;
+        contactService.delete(id, currentUser);
     }
 
 }
