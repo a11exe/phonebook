@@ -35,7 +35,7 @@ public class PhonebookApplication {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.ignoredParameterTypes(AuthenticationPrincipal.class)
 				.select()
-				.paths(PathSelectors.ant("/api/contacts/*"))
+				.paths(PathSelectors.ant("/api/**"))
 				.apis(RequestHandlerSelectors.basePackage("com.alllexe.phonebook"))
 				.build()
 				.apiInfo(apiDetails())
