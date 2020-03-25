@@ -34,17 +34,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 @ToString(exclude = {"password", "contacts"})
 @EqualsAndHashCode(of = {"id"})
 public class User implements UserDetails {
+
+  public interface UserValidations{};
+
   @Id
   @GeneratedValue(strategy=GenerationType.AUTO)
   @ApiModelProperty(hidden = true)
   private Integer id;
-  @Length(min = 3, message = "login min 3")
-  @Pattern(regexp = "^[A-Za-z1-9]*$", message = "only english letters and numbers")
+  @Length(min = 3, message = "login min 3", groups = {UserValidations.class})
+  @Pattern(regexp = "^[A-Za-z1-9]*$", message = "only english letters and numbers", groups = {UserValidations.class})
   @Column(name = "login")
   private String username;
-  @Length(min = 5, message = "name too short. min 5")
+  @Length(min = 5, message = "name too short. min 5", groups = {UserValidations.class})
   private String name;
-  @Length(min = 5, message = "password too short. min 5")
+  @Length(min = 5, message = "password too short. min 5", groups = {UserValidations.class})
   private String password;
 
   @ApiModelProperty(hidden = true)
