@@ -1,6 +1,5 @@
 package com.alllexe.phonebook.domain.dto;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +13,12 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString(exclude = {"password", "contacts"})
-@EqualsAndHashCode(of = {"id"})
+@ToString(exclude = {"password"})
 public class UserRegistrationDto {
+
+    private String username;
+    private String name;
+    private String password;
+    private String passwordConfirm;
 
 }

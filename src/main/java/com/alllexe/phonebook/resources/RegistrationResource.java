@@ -1,8 +1,10 @@
 package com.alllexe.phonebook.resources;
 
 import com.alllexe.phonebook.domain.User;
+import com.alllexe.phonebook.domain.dto.UserMapper;
+import com.alllexe.phonebook.domain.dto.UserRegistrationDto;
 import com.alllexe.phonebook.service.UserService;
-import java.util.Map;
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +33,20 @@ public class RegistrationResource {
   @Autowired
   SmartValidator validator;
 
+  private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
+
   Logger logger = LoggerFactory.getLogger(RegistrationResource.class);
 
   @PostMapping("/")
   public void addUser(
-      @RequestBody Map<String, String> userMap,
+      @RequestBody UserRegistrationDto userRegistrationDto,
       BindingResult bindingResult) throws MethodArgumentNotValidException {
 
-    User newUser = new User();
-    newUser.setUsername(userMap.get("userName"));
-    newUser.setName(userMap.get("name"));
-    newUser.setPassword(userMap.get("password"));
-    newUser.setEmail(userMap.get("email"));
+    User newUser = userMapper.userRegistrationDtoToUser(userRegistrationDto);
 
     validator.validate(newUser, bindingResult, User.class);
 
-    String passwordConfirm = userMap.get("passwordConfirm");
+    String passwordConfirm = userRegistrationDto.getPasswordConfirm();
 
     boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
     if (isConfirmEmpty) {
