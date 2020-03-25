@@ -34,7 +34,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 
     //Get all errors
     List<String> errors = ex.getBindingResult()
-        .getFieldErrors()
+        .getAllErrors()
         .stream()
         .map(DefaultMessageSourceResolvable::getDefaultMessage)
         .collect(Collectors.toList());

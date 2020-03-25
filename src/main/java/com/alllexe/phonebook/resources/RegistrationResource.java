@@ -44,7 +44,7 @@ public class RegistrationResource {
 
     User newUser = userMapper.userRegistrationDtoToUser(userRegistrationDto);
 
-    validator.validate(newUser, bindingResult, User.class);
+    validator.validate(newUser, bindingResult, User.UserValidations.class);
 
     String passwordConfirm = userRegistrationDto.getPasswordConfirm();
 
