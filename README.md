@@ -2,6 +2,29 @@
 
 [![Build Status](https://travis-ci.org/a11exe/phonebook.svg?branch=master)](https://travis-ci.org/a11exe/phonebook)
 
+## Запуск
+
+* Clone the repository:
+```bash
+git clone https://github.com/a11exe/phonebook.git
+```
+* Build the maven project:
+```bash
+mvn clean install
+```
+* Now run:
+```bash
+docker-compose up
+```
+* Stop containers:
+```bash
+docker-compose down
+```
+* Remove old stopped containers of docker-compose
+```bash
+docker-compose rm -f
+```
+
 ## Хранимые данные:
 
 Информация о пользователе в системе:
