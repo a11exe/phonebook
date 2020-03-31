@@ -1,5 +1,7 @@
 # Задание “Телефонная книга”
 
+[![Build Status](https://travis-ci.org/a11exe/phonebook.svg?branch=master)](https://travis-ci.org/a11exe/phonebook)
+
 ## Хранимые данные:
 
 Информация о пользователе в системе:
