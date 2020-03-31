@@ -1,0 +1,39 @@
+# Spring Boot configuration
+spring:
+  profiles:
+    active: development
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/phonebook
+    username: phonebook
+    password: 123
+  # JPA properties
+  jpa:
+    generate-ddl: true
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.lob.non_contextual_creation: true
+
+  session:
+    jdbc:
+      initialize-schema: always
+      table-name: SPRING_SESSION
+  # Logger configuration
+  logging:
+    pattern:
+      console: "%d %-5level %logger : %msg%n"
+    level:
+      org.springframework: info
+      org.hibernate: debug
+      org.springframework.security: debug
+  # Server configuration
+  server:
+    port: 8080 #set your port
+  freemarker:
+      expose-request-attributes: true
+      suffix: .ftl
