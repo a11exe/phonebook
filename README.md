@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/a11exe/phonebook.svg?branch=master)](https://travis-ci.org/a11exe/phonebook)
 
+![App screenshot](phonebook.png)
+
 ## Запуск
 
 * Clone the repository:
@@ -16,6 +18,9 @@ mvn clean install
 ```bash
 docker-compose up
 ```
+Application will start on [http://localhost:8080](http://localhost:8080)
+use credentials: user1 / 12345
+
 * Stop containers:
 ```bash
 docker-compose down
